@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <label htmlFor="search" className="pt-1 mr-2 font-medium">検索</label>
         <input type="text" name="search" id="search" className="px-2 rounded-md h-8 w-96" />
         <button type="submit">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-8 h-8 pb-2 mx-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="hover:bg-gray-500 rounded w-10 h-10 p-2 mx-2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </button>

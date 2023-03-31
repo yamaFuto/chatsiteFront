@@ -9,7 +9,7 @@ type Props = {
 
 const URL = "http://localhost:8000/api/comments"
 
-const MakeThread: React.FC<Props> = ({ thread_id }) => {
+const MakeComment: React.FC<Props> = ({ thread_id }) => {
 
   type MemoComment = {
     comment: string,
@@ -54,4 +54,4 @@ const MakeThread: React.FC<Props> = ({ thread_id }) => {
   )
 }
 
-export default MakeThread;
+export default MakeComment;

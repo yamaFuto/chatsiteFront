@@ -16,7 +16,7 @@ type Props = {
 const Thread: React.FC<Props> = ({ thread }) => {
   return (
     <>
-      <dl className="bg-yellow-200 h-28 m-10 mx-48 border-4">
+      <dl className="hover:bg-yellow-400 bg-yellow-200 h-28 m-10 mx-48 border-4">
         <Link href={`/chat/${thread.id}`}>
         <dd className="text-3xl mt-2 mx-2 h-16">
           {thread.theme}
