@@ -25,7 +25,7 @@ const makeThread: React.FC<Props> = () => {
               <option value="others" >その他</option>
             </select>
           </div>
-          <button className="border-2 border-amber-300 p-2 text-xl rounded bg-orange-500 m-20">make!</button>
+          <button className="hover:bg-orange-700 border-2 border-amber-300 p-2 text-xl rounded bg-orange-500 m-20">make!</button>
         </div>
       </form>
     </>
