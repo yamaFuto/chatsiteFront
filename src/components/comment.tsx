@@ -11,7 +11,8 @@ type Props = {
 type content = {
   thread_id: number,
   id: number,
-  created_at: Date,
+  created_at: string,
+  date: string,
   goods: number,
   comment: string,
 }

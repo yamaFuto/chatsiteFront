@@ -6,7 +6,8 @@ import { useState } from 'react'
 type content = {
   thread_id: number,
   id: number,
-  created_at: Date,
+  created_at: string,
+  date: string,
   goods: number,
   comment: string,
 }
@@ -47,7 +48,7 @@ const Com: React.FC<Props> = ({ comment, i }) => {
             </svg>
             <p>comment.name</p>
           </li>
-          <li className="px-2 border-r-2">{comment.created_at}</li>
+          <li className="px-2 border-r-2">{comment.date}</li>
           <li className="flex px-2 border-r-2">
             <div>
               {goods}

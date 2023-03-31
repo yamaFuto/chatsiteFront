@@ -13,8 +13,8 @@ type threadType = {
   id: number,
   sum: number,
   genre: string,
-  created_at: Date,
-  updated_at: Date,
+  created_at: string,
+  updated_at: string,
 }
 
 export default function Home() {
@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <>
     <select value={genre} onChange={updatedMemo} className="w-96 mt-8 ml-10 border-orange-300 border-2" name="genre" id="genre">
-        <option value="">ジャンルを選択してください</option>
+        <option value="">すべてのジャンルを表示</option>
         <option value="sports" >スポーツ</option>
         <option value="cooking" >料理</option>
         <option value="politics" >政治</option>

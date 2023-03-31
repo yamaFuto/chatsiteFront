@@ -33,7 +33,7 @@ const MakeThread: React.FC<Props> = () => {
         theme: '',
         genre: ''
       });
-      router.reload();
+      router.push("/");
     }).catch(error => {
       console.log(error);
     })

@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     <>
     <div className="flex items-center bg-gray-300 py-6 flex-wrap">
       <Link href="/">
-      <div className="text-5xl mx-10 mr-32 pb-3 hover:bg-amber-500 bg-amber-300 rounded-lg border-r-4">Logo</div>
+      <div className="text-5xl mx-10 mr-32 p-3 hover:bg-amber-500 bg-amber-300 rounded-lg border-r-4">CHATSITE</div>
       </Link>
       <form method="post" className="flex">
         <label htmlFor="search" className="pt-1 mr-2 font-medium">検索</label>

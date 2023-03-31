@@ -5,8 +5,9 @@ type Thread = {
   id: number,
   theme: string,
   sum: number,
-  created_at: Date,
-  updated_at: Date,
+  date: string,
+  created_at: string,
+  updated_at: string,
 }
 
 type Props = {
@@ -29,7 +30,7 @@ const Thread: React.FC<Props> = ({ thread }) => {
               </svg>
             </li>
             <li className="mx-1 mr-4">user name</li>
-            <li className="mx-4">{thread.created_at}</li>
+            <li className="mx-4">{thread.date}</li>
             <li className="mx-4">{thread.sum} talks</li>
           </ol>
         </dt>
