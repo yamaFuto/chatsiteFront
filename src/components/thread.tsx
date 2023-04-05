@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import React from 'react';
 
-type Thread = {
+type threadType = {
   id: number,
   theme: string,
   sum: number,
+  genre: string,
   date: string,
   created_at: string,
   updated_at: string,
 }
 
 type Props = {
-  thread: Thread
+  thread: threadType
 }
 
 const Thread: React.FC<Props> = ({ thread }) => {

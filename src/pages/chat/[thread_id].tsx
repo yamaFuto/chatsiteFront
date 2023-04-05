@@ -2,6 +2,7 @@ import React from 'react'
 import Comment from '@/components/comment'
 import MakeComment from '@/pages/chat/makeComment';
 
+
 export default function Playground({ id }) {
   return (
     <>

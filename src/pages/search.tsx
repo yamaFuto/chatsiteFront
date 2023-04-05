@@ -1,11 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '@/styles/Home.module.css'
-import Layout from '@/components/layout'
-import Comment from '@/components/comment'
 import Thread from '@/components/thread';
-import axios from "axios";
 import { useEffect, useState, ChangeEvent } from "react";
+import { useTheme } from "@/context/ThemeContext"
 
 const URL = "http://localhost:8000/api/threads";
 
@@ -20,7 +15,8 @@ type threadType = {
 }
 
 export default function Home() {
-  const [ threads, setThreads ] = useState<threadType[]>([]);
+
+  const { theme } = useTheme();
 
   const [ genre, setGenre] = useState<string>('');
 
@@ -30,19 +26,7 @@ export default function Home() {
     setGenre(e.target.value)
   }
 
-  useEffect (() => {
-    try {
-      const getThreads = async () => {
-        const res = await axios.get(URL);
-        console.log(res);
-        setThreads(res.data);
-      }
-      getThreads();
-      // console.log(threads);
-    } catch (e) {
-      return e;
-    }
-  }, []);
+
 
   return (
     <>
@@ -61,8 +45,8 @@ export default function Home() {
         <option value="others" >その他</option>
       </select>
       { genre ?
-         threads.filter((thread: threadType) => thread.genre == genre).map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
-        :threads.map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
+         theme.filter((thread: threadType) => thread.genre == genre).map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
+        :theme.map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
       }
     </>
   )
