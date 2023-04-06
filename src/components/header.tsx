@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useTheme } from "@/context/ThemeContext"
 import axios from "axios"
+import { usePagination } from "@/context/PaginationContext";
+import { useSent } from "@/context/SentContext"
 
 const URL = "http://localhost:8000/api/theme"
 
@@ -13,16 +15,21 @@ const Header: React.FC = () => {
   const onClick = () => {
     router.push('/chat/makeThread');
   }
+
   const { theme, setTheme } = useTheme();
+  const { pagination, setPagination } = usePagination();
+  const { sent, setSent } = useSent();
 
   const updatedMemoForm = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setWord({... word, [e.target.name]: e.target.value});
+    setSent({... sent, [e.target.name]: e.target.value});
   }
 
   const sendTheme = async () => {
     await axios.post(URL, word).then((res) => {
+      setPagination(res.data);
       setTheme(res.data.data);
       console.log(res.data);
       router.push("/search")
