@@ -31,7 +31,7 @@ const Comment: React.FC<Props> = ({ thread_id }) => {
         setComments(res.data);
       }
       getComment();
-      console.log(comments);
+      // console.log(comments);
     } catch (e) {
       return e;
     }

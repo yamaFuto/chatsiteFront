@@ -27,12 +27,10 @@ export default function Home() {
   }
   const [ genre, setGenre] = useState<string>(sort.data);
 
-
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
   ) => {
     setGenre(e.target.value);
-
   }
 
 
@@ -40,8 +38,8 @@ export default function Home() {
     try {
       const getThreads = async () => {
         const res = await axios.post(URL, sort);
-        console.log(res);
-        setPage(res.data)
+        // console.log(res);
+        setPage(res.data);
         setThreads(res.data.data);
       }
       getThreads();
@@ -49,12 +47,21 @@ export default function Home() {
     } catch (e) {
       return e;
     }
-    if (genre) {
+
+    if (genre  == sort.data) {
       router.push(`/Sort/${genre}`)
     } else {
       router.push("/");
     }
   }, [pageIndex, genre]);
+
+  // useEffect (() => {
+  //   if (genre) {
+  //     router.push(`/Sort/${genre}`)
+  //   } else {
+  //     router.push("/");
+  //   }
+  // }, [ genre ])
 
   return (
     <>
@@ -72,7 +79,7 @@ export default function Home() {
         <option value="anime" >アニメ</option>
         <option value="others" >その他</option>
       </select>
-      {threads.map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))}
+      {threads.map((thread: threadType) => ( <Thread key={thread.id} thread={thread} />))}
 
       <div className="text-right mr-20">
         <div className="flex flex-col items-center">
