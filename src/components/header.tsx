@@ -34,7 +34,6 @@ const Header: React.FC = () => {
       setPagination(res.data);
       setTheme(res.data.data);
       setSearch(sent);
-      console.log(res.data);
       router.push("/search")
     }).catch(error => {
       console.log(error);

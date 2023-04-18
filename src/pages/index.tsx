@@ -29,19 +29,16 @@ export default function Home() {
     e: ChangeEvent<HTMLSelectElement>
   ) => {
     setGenre(e.target.value);
-    
   }
 
   useEffect (() => {
     try {
       const getThreads = async () => {
         const res = await axios.get(URL);
-        // console.log(res);
         setPage(res.data)
         setThreads(res.data.data);
       }
       getThreads();
-      // console.log(threads);
     } catch (e) {
       return e;
     }

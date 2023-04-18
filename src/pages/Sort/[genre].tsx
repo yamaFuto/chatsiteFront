@@ -21,13 +21,12 @@ export default function Home() {
   const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
 
   const router = useRouter();
-  // const sort = router.query.genre;
+
   const sort = {
     data: router.query.genre,
   }
-  // console.log(sort);
+
   const [ genre, setGenre] = useState<string>(sort.data);
-  console.log(genre);
 
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
@@ -39,36 +38,24 @@ export default function Home() {
   useEffect (() => {
     try {
       const getThreads = async () => {
-        console.log(genre, "ex");
         const web = {
           data: genre,
         }
         const res = await axios.post(URL, web);
-        // console.log(res);
         setPage(res.data);
         setThreads(res.data.data);
       }
       getThreads();
-      // console.log(threads);
     } catch (e) {
       return e;
     }
 
     if (genre) {
       router.push(`/Sort/${genre}`);
-      // sedn();
     } else if (!genre) {
       router.push("/");
     }
   }, [pageIndex, genre]);
-
-  // useEffect (() => {
-  //   if (genre) {
-  //     router.push(`/Sort/${genre}`)
-  //   } else {
-  //     router.push("/");
-  //   }
-  // }, [ genre ])
 
   return (
     <>

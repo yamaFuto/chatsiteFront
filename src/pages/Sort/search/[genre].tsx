@@ -29,7 +29,7 @@ export default function Home() {
   }
   // console.log(sort);
   const [ genre, setGenre] = useState<string>(sort.data);
-  console.log(genre);
+  // console.log(genre);
 
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
@@ -40,39 +40,26 @@ export default function Home() {
   useEffect (() => {
     try {
       const getThreads = async () => {
-        console.log(genre, "ex");
         const web = {
           data: genre,
           word: search.word,
         }
-        console.log(web, "aaaa")
         const res = await axios.post(URL, web);
-        // console.log(res);
         setPage(res.data);
         setThreads(res.data.data);
       }
       getThreads();
-      // console.log(threads);
     } catch (e) {
       return e;
     }
 
     if (genre) {
       router.push(`/Sort/search/${genre}`);
-      // sedn();
     } else if (!genre) {
       router.push("/");
     }
   }, [pageIndex, genre]);
-
-  // useEffect (() => {
-  //   if (genre) {
-  //     router.push(`/Sort/${genre}`)
-  //   } else {
-  //     router.push("/");
-  //   }
-  // }, [ genre ])
-
+  
   return (
     <>
     <select value={genre} onChange={updatedMemo} className="w-96 mt-8 ml-10 border-orange-300 border-2" name="genre" id="genre">

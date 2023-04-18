@@ -47,7 +47,6 @@ export default function Home() {
         })
       }
       getThreads();
-      // console.log(threads);
     } catch (e) {
       return e;
     }
