@@ -6,6 +6,7 @@ import { useTheme } from "@/context/ThemeContext"
 import axios from "axios"
 import { usePagination } from "@/context/PaginationContext";
 import { useSent } from "@/context/SentContext"
+import { useSearch } from "@/context/SearchContext";
 
 const URL = "http://localhost:8000/api/theme"
 
@@ -16,6 +17,7 @@ const Header: React.FC = () => {
     router.push('/chat/makeThread');
   }
 
+  const { search, setSearch } = useSearch();
   const { theme, setTheme } = useTheme();
   const { pagination, setPagination } = usePagination();
   const { sent, setSent } = useSent();
@@ -31,6 +33,7 @@ const Header: React.FC = () => {
     await axios.post(URL, word).then((res) => {
       setPagination(res.data);
       setTheme(res.data.data);
+      setSearch(sent);
       console.log(res.data);
       router.push("/search")
     }).catch(error => {

@@ -9,6 +9,7 @@ import { useEffect, useState, ChangeEvent } from "react";
 import { DataWithPagination } from "@/types/dataWithPagination"
 import { threadType } from "@/types/thread"
 import { useRouter } from "next/router";
+import { sortAndDeduplicateDiagnostics } from 'typescript'
 
 
 export default function Home() {

@@ -9,16 +9,18 @@ import { useEffect, useState, ChangeEvent, useRef } from "react";
 import { DataWithPagination } from "@/types/dataWithPagination"
 import { threadType } from "@/types/thread"
 import { useRouter } from "next/router";
+import { useSearch } from "@/context/SearchContext";
 
 
 export default function Home() {
+  const { search, setSearch } = useSearch();
   const [ threads, setThreads ] = useState<threadType[]>([]);
 
   const [ page, setPage ] = useState<DataWithPagination>(0);
 
   const [ pageIndex , setPageIndex ] = useState(1);
 
-  const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
+  const URL = `http://localhost:8000/api/sort/search?page=${pageIndex}`;
 
   const router = useRouter();
   // const sort = router.query.genre;
@@ -35,14 +37,15 @@ export default function Home() {
     setGenre(e.target.value);
   }
 
-
   useEffect (() => {
     try {
       const getThreads = async () => {
         console.log(genre, "ex");
         const web = {
           data: genre,
+          word: search.word,
         }
+        console.log(web, "aaaa")
         const res = await axios.post(URL, web);
         // console.log(res);
         setPage(res.data);
@@ -55,7 +58,7 @@ export default function Home() {
     }
 
     if (genre) {
-      router.push(`/Sort/${genre}`);
+      router.push(`/Sort/search/${genre}`);
       // sedn();
     } else if (!genre) {
       router.push("/");

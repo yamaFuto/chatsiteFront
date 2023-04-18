@@ -4,10 +4,12 @@ import Layout from "@/components/layout"
 import { ThemeProvider } from "@/context/ThemeContext"
 import { PaginationProvider } from "@/context/PaginationContext"
 import { SentProvider } from "@/context/SentContext";
+import { SearchProvider } from "@/context/SearchContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+    <SearchProvider>
       <SentProvider>
         <ThemeProvider>
           <PaginationProvider>
@@ -17,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </PaginationProvider>
         </ThemeProvider>
       </SentProvider>
+    </SearchProvider>
     </>
   )
 }

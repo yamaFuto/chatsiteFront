@@ -4,6 +4,7 @@ import { useTheme } from "@/context/ThemeContext"
 import { usePagination } from "@/context/PaginationContext"
 import axios from "axios";
 import { useSent } from "@/context/SentContext"
+import { useRouter } from "next/router";
 
 type threadType = {
   id: number,
@@ -23,6 +24,8 @@ export default function Home() {
   const [ pageIndex , setPageIndex ] = useState(1);
   const [ genre, setGenre] = useState<string>('');
 
+  const router = useRouter();
+
   const URL_SEARCH = `http://localhost:8000/api/theme?page=${pageIndex}`;
 
   const updatedMemo = (
@@ -30,9 +33,10 @@ export default function Home() {
   ) => {
     setGenre(e.target.value)
   }
+  // console.log(theme);
 
-  console.log(pagination)
-  console.log(sent, "a");
+  // console.log(pagination)
+  // console.log(sent, "a");
 
   useEffect (() => {
     try {
@@ -47,7 +51,10 @@ export default function Home() {
     } catch (e) {
       return e;
     }
-  }, [pageIndex]);
+    if (genre) {
+      router.push(`/Sort/search/${genre}`)
+    }
+  }, [pageIndex, genre]);
 
 
 
@@ -67,10 +74,7 @@ export default function Home() {
         <option value="anime" >アニメ</option>
         <option value="others" >その他</option>
       </select>
-      { genre ?
-         theme.filter((thread: threadType) => thread.genre == genre).map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
-        :theme.map((thread: threadType) => ( <Thread key="thread.id" thread={thread} />))
-      }
+      {theme.map((thread: threadType) => ( <Thread key={thread.id} thread={thread} />))}
 
       <div className="text-right mr-20">
               <div className="flex flex-col items-center">
