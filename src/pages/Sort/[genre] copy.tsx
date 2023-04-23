@@ -18,23 +18,27 @@ export default function Home() {
 
   const [ pageIndex , setPageIndex ] = useState(1);
 
-  const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
-
+  
+  
   const router = useRouter();
   // const sort = router.query.genre;
   const sort = {
     data: router.query.genre,
   }
   const [ genre, setGenre] = useState<string>(sort.data);
-
+  
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setGenre(e.target.value);
-  }
-
-
-  useEffect (() => {
+    ) => {
+      setGenre(e.target.value);
+    }
+    
+    
+    useEffect (() => {
+    const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
+    const sort = {
+      data: router.query.genre,
+    }
     try {
       const getThreads = async () => {
         const res = await axios.post(URL, sort);
@@ -53,7 +57,7 @@ export default function Home() {
     } else {
       router.push("/");
     }
-  }, [pageIndex, genre]);
+  }, [pageIndex, genre, router]);
 
   // useEffect (() => {
   //   if (genre) {

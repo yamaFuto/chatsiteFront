@@ -19,9 +19,9 @@ export default function Home() {
   const [ page, setPage ] = useState<DataWithPagination>(0);
 
   const [ pageIndex , setPageIndex ] = useState(1);
-
-  const URL = `http://localhost:8000/api/sort/search?page=${pageIndex}`;
-
+  
+  
+  
   const router = useRouter();
   // const sort = router.query.genre;
   const sort = {
@@ -30,14 +30,15 @@ export default function Home() {
   // console.log(sort);
   const [ genre, setGenre] = useState<string>(sort.data);
   // console.log(genre);
-
+  
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setGenre(e.target.value);
-  }
-
+    ) => {
+      setGenre(e.target.value);
+    }
+    
   useEffect (() => {
+    const URL = `http://localhost:8000/api/sort/search?page=${pageIndex}`;
     try {
       const getThreads = async () => {
         const web = {
@@ -56,7 +57,7 @@ export default function Home() {
     if (genre) {
       router.push(`/Sort/search/${genre}`);
     } else if (!genre) {
-      router.push("/");
+      router.push("/search");
     }
   }, [pageIndex, genre]);
   

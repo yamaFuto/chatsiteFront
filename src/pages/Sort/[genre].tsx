@@ -13,29 +13,30 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const [ threads, setThreads ] = useState<threadType[]>([]);
-
+  
   const [ page, setPage ] = useState<DataWithPagination>(0);
-
+  
   const [ pageIndex , setPageIndex ] = useState(1);
 
-  const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
-
+  
+  
   const router = useRouter();
-
+  
   const sort = {
     data: router.query.genre,
   }
-
-  const [ genre, setGenre] = useState<string>(sort.data);
-
+  
+  const [genre, setGenre] = useState<string>(sort.data);
+  
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setGenre(e.target.value);
-  }
-
-
+    ) => {
+      setGenre(e.target.value);
+    }
+    
+    
   useEffect (() => {
+    const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
     try {
       const getThreads = async () => {
         const web = {

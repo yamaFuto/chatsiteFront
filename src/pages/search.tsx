@@ -5,6 +5,7 @@ import { usePagination } from "@/context/PaginationContext"
 import axios from "axios";
 import { useSent } from "@/context/SentContext"
 import { useRouter } from "next/router";
+import { useSearch } from "@/context/SearchContext";
 
 type threadType = {
   id: number,
@@ -18,6 +19,7 @@ type threadType = {
 
 export default function Home() {
 
+  const { search, setSearch } = useSearch();
   const { theme, setTheme } = useTheme();
   const { pagination, setPagination } = usePagination();
   const { sent, setSent } = useSent();
@@ -41,7 +43,7 @@ export default function Home() {
   useEffect (() => {
     try {
       const getThreads = async () => {
-        const res = await axios.post(URL_SEARCH, sent).then((res) => {
+        const res = await axios.post(URL_SEARCH, search).then((res) => {
           setPagination(res.data);
           setTheme(res.data.data);
         })

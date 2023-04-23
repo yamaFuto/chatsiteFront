@@ -19,19 +19,19 @@ export default function Home() {
 
   const [ pageIndex , setPageIndex ] = useState(1);
 
-  const URL = `http://localhost:8000/api/threads?page=${pageIndex}`;
-
+  
   const [ genre, setGenre] = useState<string>('');
-
+  
   const router = useRouter();
-
+  
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setGenre(e.target.value);
-  }
-
+    ) => {
+      setGenre(e.target.value);
+    }
+    
   useEffect (() => {
+    const URL = `http://localhost:8000/api/threads?page=${pageIndex}`;
     try {
       const getThreads = async () => {
         const res = await axios.get(URL);
