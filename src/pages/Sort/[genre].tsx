@@ -34,7 +34,6 @@ export default function Home() {
       setGenre(e.target.value);
     }
     
-    
   useEffect (() => {
     const URL = `http://localhost:8000/api/sort?page=${pageIndex}`;
     try {

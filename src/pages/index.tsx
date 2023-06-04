@@ -9,17 +9,31 @@ import { useEffect, useState, ChangeEvent } from "react";
 import { DataWithPagination } from "@/types/dataWithPagination"
 import { threadType } from "@/types/thread"
 import { useRouter } from "next/router";
-import { sortAndDeduplicateDiagnostics } from 'typescript'
+
+const sample = {
+  current_page: 0,
+  last_page: 0,
+  path: "",
+  per_page: 0,
+  from: 0,
+  to: 0,
+  total: 0,
+  links: {
+      url: "",
+      label: "",
+      active: true,
+    }
+  };
 
 
 export default function Home() {
   const [ threads, setThreads ] = useState<threadType[]>([]);
 
-  const [ page, setPage ] = useState<DataWithPagination>(0);
+  const [ page, setPage ] = useState<DataWithPagination>(sample);
 
   const [ pageIndex , setPageIndex ] = useState(1);
 
-  
+
   const [ genre, setGenre] = useState<string>('');
   
   const router = useRouter();
@@ -32,20 +46,23 @@ export default function Home() {
     
   useEffect (() => {
     const URL = `http://localhost:8000/api/threads?page=${pageIndex}`;
-    try {
-      const getThreads = async () => {
-        const res = await axios.get(URL);
-        setPage(res.data)
-        setThreads(res.data.data);
+    const dos = () => {
+      try {
+        const getThreads = async () => {
+          const res = await axios.get(URL);
+          setPage(res.data)
+          setThreads(res.data.data);
+        }
+        getThreads();
+      } catch (e) {
+        return e;
       }
-      getThreads();
-    } catch (e) {
-      return e;
     }
+    dos();
     if (genre) {
       router.push(`/Sort/${genre}`)
     }
-  }, [pageIndex, genre]);
+  }, [pageIndex, genre, router]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import Thread from '@/components/thread';
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent, useMemo } from "react";
 import { useTheme } from "@/context/ThemeContext"
 import { usePagination } from "@/context/PaginationContext"
 import axios from "axios";
@@ -18,44 +18,46 @@ type threadType = {
 }
 
 export default function Home() {
-
+  
   const { search, setSearch } = useSearch();
   const { theme, setTheme } = useTheme();
   const { pagination, setPagination } = usePagination();
   const { sent, setSent } = useSent();
   const [ pageIndex , setPageIndex ] = useState(1);
   const [ genre, setGenre] = useState<string>('');
-
+  
   const router = useRouter();
-
-  const URL_SEARCH = `http://localhost:8000/api/theme?page=${pageIndex}`;
-
+  
   const updatedMemo = (
     e: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setGenre(e.target.value)
-  }
-  // console.log(theme);
-
-  // console.log(pagination)
-  // console.log(sent, "a");
-
-  useEffect (() => {
-    try {
-      const getThreads = async () => {
-        const res = await axios.post(URL_SEARCH, search).then((res) => {
-          setPagination(res.data);
-          setTheme(res.data.data);
-        })
-      }
-      getThreads();
-    } catch (e) {
-      return e;
+    ) => {
+      setGenre(e.target.value)
     }
+    // console.log(theme);
+    
+    // console.log(pagination)
+    // console.log(sent, "a");
+    
+    useEffect (() => {
+      const URL_SEARCH = `http://localhost:8000/api/theme?page=${pageIndex}`;
+      const dos = () => {
+        try {
+          const getThreads = async () => {
+            const res = await axios.post(URL_SEARCH, search).then((res) => {
+              setPagination(res.data);
+              setTheme(res.data.data);
+            })
+          }
+          getThreads();
+        } catch (e) {
+          return e;
+        }
+      }
+    dos();
     if (genre) {
       router.push(`/Sort/search/${genre}`)
     }
-  }, [pageIndex, genre]);
+  }, [pageIndex, genre, router, setPagination, search, setTheme]);
 
 
 
